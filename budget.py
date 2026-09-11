@@ -45,17 +45,27 @@ def save():
         json.dump(expenses,f)
     print("Saved!")
 
+def remove():
+    removal = input("What would you like to remove? ")
+    for i in expenses:
+        if i["Name"].lower() == removal.lower():
+            expenses.remove(i)
+            print('Deleted! ')
+            break
+        
+
 actions = {
     '1': add_expense,
     '2': view_expenses,
     '3': view_expenses_category,
-    '4': save
+    '4': save,
+    '5': remove
     
 }
 
 while True:
-    choice = input("What would you like to do? \n [1] Add expense \n [2] View expenses \n [3] View expenses by category \n [4] Save \n [5] Quit \n")
-    if choice == '5':
+    choice = input("What would you like to do? \n [1] Add expense \n [2] View expenses \n [3] View expenses by category \n [4] Save \n [5] Remove \n [6] Quit \n")
+    if choice == '6':
         break
     elif choice in actions:
         actions[choice]()
