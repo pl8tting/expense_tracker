@@ -4,6 +4,8 @@ try:
         expenses = json.load(f)
 except json.decoder.JSONDecodeError:
     expenses = []
+except FileNotFoundError:
+    expenses = []
 def add_expense():
     while True:
         name = input("Name of the expense? ")
@@ -31,12 +33,13 @@ def view_expenses():
     for i in expenses:
         for key,value in i.items():
             print(f'{key}: {value}')
+        print("= = = =")
 
 def view_expenses_category():
     category = input("What category would you like to see? ")
     total_expense = 0
     for i in expenses:
-        if i["Category"] == category:
+        if i["Category"].lower() == category.lower():
             total_expense += i["Price"]
     print(f"Total expenses in the {category} category is {total_expense}")
 
@@ -70,4 +73,4 @@ while True:
     elif choice in actions:
         actions[choice]()
     else:
-        print("Please type either 1,2,3 or 4")
+        print("Please type either 1,2,3,4,5 or 6")
